@@ -4,7 +4,8 @@ import express from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
 import { connectToLocalDatabase } from "./config/db"; // Import your database connection function
-
+import productsRouter from "./routes/productRoutes.js";
+import categoriesRouter from "./routes/categoryRoutes.js";
 // Create an Express application
 const app = express();
 
@@ -19,6 +20,12 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
 	res.json({ message: "Hello, world!" });
 });
+
+// Mount the categories router
+app.use("/api", categoriesRouter);
+
+// Mount the products router
+app.use("/api", productsRouter);
 
 // Start the Express server
 const PORT = process.env.PORT || 3000; // Use the specified port or default to 3000
