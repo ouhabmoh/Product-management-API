@@ -70,7 +70,7 @@ class ProductService {
 				throw new Error("Product not found");
 			}
 
-			await product.remove();
+			await Product.deleteOne({ _id: product._id });
 		} catch (error) {
 			throw error;
 		}
