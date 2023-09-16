@@ -25,4 +25,10 @@ router.get(
 	purchaseController.getTopSellingProducts
 );
 
+// Purchase trends
+router.get(
+	"/purchases/stats/purchase-trends",
+	purchaseController.getPurchaseTrends
+);
+
 export default router;

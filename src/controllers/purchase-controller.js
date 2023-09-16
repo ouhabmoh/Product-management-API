@@ -93,6 +93,16 @@ class PurchaseController {
 			res.status(500).json({ error: "Internal Server Error" });
 		}
 	}
+
+	async getPurchaseTrends(req, res) {
+		try {
+			const purchaseTrends = await purchaseService.getPurchaseTrends();
+			res.json(purchaseTrends);
+		} catch (error) {
+			console.error("Error fetching purchase trends:", error);
+			res.status(500).json({ error: "Internal Server Error" });
+		}
+	}
 }
 
 export default new PurchaseController();

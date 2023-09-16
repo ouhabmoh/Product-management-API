@@ -92,6 +92,30 @@ class PurchaseService {
 			throw error;
 		}
 	}
+
+	async getPurchaseTrends() {
+		try {
+			const purchaseTrends = await Purchase.aggregate([
+				// Aggregation pipeline for purchase trends
+				{
+					$group: {
+						_id: {
+							year: { $year: "$purchaseDate" },
+							month: { $month: "$purchaseDate" },
+						},
+						count: { $sum: 1 },
+					},
+				},
+				{
+					$sort: { "_id.year": 1, "_id.month": 1 },
+				},
+			]);
+
+			return purchaseTrends;
+		} catch (error) {
+			throw error;
+		}
+	}
 }
 
 export default new PurchaseService();
