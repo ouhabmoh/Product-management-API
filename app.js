@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import { connectToDatabase } from "./src/configs/db.js"; // Import your database connection function
 import productsRouter from "./src/routes/product-routes.js";
 import categoriesRouter from "./src/routes/category-routes.js";
+import purchasesRouter from "./src/routes/purchase-routes.js";
 // Create an Express application
 const app = express();
 
@@ -26,6 +27,9 @@ app.use("/api", categoriesRouter);
 
 // Mount the products router
 app.use("/api", productsRouter);
+
+// Mount the purchases router
+app.use("/api", purchasesRouter);
 
 // Start the Express server
 const PORT = process.env.PORT || 3000; // Use the specified port or default to 3000
