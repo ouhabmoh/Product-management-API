@@ -116,6 +116,37 @@ class PurchaseService {
 			throw error;
 		}
 	}
+
+	async calculateTotalPurchases() {
+		try {
+			const purchaseStats = await Purchase.aggregate([
+				// Calculate total purchases
+				{
+					$group: {
+						_id: null,
+						totalPurchases: { $sum: 1 }, // Count total purchases
+						totalQuantities: { $sum: "$quantity" }, // Sum total quantities
+						totalPrice: { $sum: "$price" }, // Sum total prices
+					},
+				},
+				// project the results to remove the _id field
+				{
+					$project: {
+						_id: 0, // Exclude the _id field from the result
+						totalPurchases: 1,
+						totalQuantities: 1,
+						totalPrice: 1,
+					},
+				},
+			]);
+
+			return purchaseStats[0];
+		} catch (error) {
+			throw new Error(
+				"Error calculating purchase statistics: " + error.message
+			);
+		}
+	}
 }
 
 export default new PurchaseService();

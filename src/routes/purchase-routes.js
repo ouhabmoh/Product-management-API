@@ -4,6 +4,9 @@ import purchaseController from "../controllers/purchase-controller.js";
 
 const router = express.Router();
 
+// Purchase statistics
+router.get("/purchases/stats", purchaseController.getPurchaseStats);
+
 // Create a new purchase
 router.post("/purchases", purchaseController.createPurchase);
 

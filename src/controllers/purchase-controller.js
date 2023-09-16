@@ -103,6 +103,25 @@ class PurchaseController {
 			res.status(500).json({ error: "Internal Server Error" });
 		}
 	}
+
+	async getPurchaseStats(req, res) {
+		try {
+			const purchaseStats =
+				await purchaseService.calculateTotalPurchases();
+
+			if (!purchaseStats) {
+				return res
+					.status(404)
+					.json({ error: "No purchase data available." });
+			}
+
+			res.status(200).json(purchaseStats);
+		} catch (error) {
+			console.error("Error retrieving purchase statistics:", error);
+
+			res.status(500).json({ error: "Internal Server Error" });
+		}
+	}
 }
 
 export default new PurchaseController();
