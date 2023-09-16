@@ -17,11 +17,6 @@ const productSchema = new mongoose.Schema({
 		required: true,
 	},
 
-	owner: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "User", // Reference to the User model (assuming a user owns the product)
-		required: true,
-	},
 	qte: {
 		type: Number,
 		default: 0,
