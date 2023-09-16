@@ -33,11 +33,19 @@ class ProductController {
 				filters.category = category;
 			}
 
-			filters.price = {
-				...(minPrice !== undefined ? { $gte: minPrice } : {}),
-				...(maxPrice !== undefined ? { $lte: maxPrice } : {}),
-			};
+			if (minPrice !== undefined || maxPrice !== undefined) {
+				filters.price = {};
+				if (minPrice !== undefined) {
+					filters.price.$gte = minPrice;
+				}
+				if (maxPrice !== undefined) {
+					filters.price.$lte = maxPrice;
+				}
+			}
 
+			console.log(filters);
+			console.log(page);
+			console.log(limit);
 			const products = await productService.getProducts({
 				page: parseInt(page),
 				limit: parseInt(limit),
