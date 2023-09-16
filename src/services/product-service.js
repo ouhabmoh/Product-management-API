@@ -1,5 +1,5 @@
 // services/product.service.js
-import Product from "../models/product.model";
+import Product from "../models/Product.js";
 
 class ProductService {
 	async addProduct(productData) {

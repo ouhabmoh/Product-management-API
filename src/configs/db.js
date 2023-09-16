@@ -1,14 +1,19 @@
 // config/db.js
-
+import dotenv from "dotenv";
 import mongoose from "mongoose";
-import config from "./index"; // Assuming you have an index.js for environment-specific configuration
-
+import config from "./index.js"; // Assuming you have an index.js for environment-specific configuration
+const envPath =
+	"C:/Users/Utilisateur/Desktop/Projects/Legal-Doctorine/.env.development";
+console.log(envPath);
+// Load environment-specific variables from the .env file
+dotenv.config();
 // Function to connect to the database
 async function connectToDatabase() {
 	try {
-		const { url } = config.database;
-
-		await mongoose.connect(url, {
+		console.log(config);
+		// const { url } = config.database;
+		console.log(process.env.DEV_DATABASE_URL);
+		await mongoose.connect(process.env.DEV_DATABASE_URL, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 			// Other MongoDB options

@@ -1,5 +1,5 @@
 // controllers/category.controller.js
-import categoryService from "../services/category.service";
+import categoryService from "../services/category-service.js";
 
 class CategoryController {
 	async getCategories(req, res) {

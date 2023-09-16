@@ -1,5 +1,5 @@
 // services/category.service.js
-import Category from "../models/category.model";
+import Category from "../models/Category.js";
 
 class CategoryService {
 	async getCategories() {

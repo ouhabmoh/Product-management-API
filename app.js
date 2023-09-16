@@ -3,9 +3,9 @@
 import express from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
-import { connectToLocalDatabase } from "./config/db"; // Import your database connection function
-import productsRouter from "./routes/productRoutes.js";
-import categoriesRouter from "./routes/categoryRoutes.js";
+import { connectToDatabase } from "./src/configs/db.js"; // Import your database connection function
+import productsRouter from "./src/routes/product-routes.js";
+import categoriesRouter from "./src/routes/category-routes.js";
 // Create an Express application
 const app = express();
 
@@ -34,7 +34,7 @@ app.listen(PORT, () => {
 });
 
 // Connect to the local database when the application starts
-connectToLocalDatabase()
+connectToDatabase()
 	.then(() => {
 		console.log("Connected to the local database");
 	})

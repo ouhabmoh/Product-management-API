@@ -3,12 +3,24 @@
 import dotenv from "dotenv";
 
 // Load environment-specific variables from .env files
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+import path from "path"; // Import the 'path' module
 
+// Get the directory name of the current module using import.meta.url
+const currentDir = path.dirname(new URL(import.meta.url).pathname);
+
+// Construct the path to the .env file two levels up from the current directory
+//const envPath = path.join(currentDir, `../../.env.${process.env.NODE_ENV}`);
+const envPath =
+	"C:/Users/Utilisateur/Desktop/Projects/Legal-Doctorine/.env.development";
+console.log(envPath);
+// Load environment-specific variables from the .env file
+dotenv.config({ path: envPath });
+console.log(process.env.NODE_ENV);
+console.log(process.env.DEV_DATABASE_URL);
 const development = {
 	server: {
-		port: 3000,
-		host: "localhost",
+		port: process.env.DEV_SERVER_PORT || 3000,
+		host: process.env.DEV_SERVER_HOST || "localhost",
 	},
 	database: {
 		url: process.env.DEV_DATABASE_URL,
@@ -31,5 +43,5 @@ const config = {
 	development,
 	production,
 };
-
+console.log(config[`${process.env.NODE_ENV}`]);
 export default config[process.env.NODE_ENV];
