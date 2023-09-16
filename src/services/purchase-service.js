@@ -56,6 +56,42 @@ class PurchaseService {
 			throw error;
 		}
 	}
+
+	async getTopSellingProducts(limit) {
+		try {
+			const topSellingProducts = await Purchase.aggregate([
+				{
+					$group: {
+						_id: "$product",
+						totalQuantitySold: { $sum: "$quantity" },
+					},
+				},
+				{
+					$sort: {
+						totalQuantitySold: -1, // Sort in descending order (highest to lowest)
+					},
+				},
+				{
+					$limit: 10, // Limit the results to the top 10 selling products
+				},
+				{
+					$lookup: {
+						from: "products", // Replace with your actual collection name
+						localField: "_id",
+						foreignField: "_id",
+						as: "productDetails",
+					},
+				},
+				{
+					$unwind: "$productDetails",
+				},
+			]);
+
+			return topSellingProducts;
+		} catch (error) {
+			throw error;
+		}
+	}
 }
 
 export default new PurchaseService();

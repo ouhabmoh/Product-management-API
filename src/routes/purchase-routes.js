@@ -19,4 +19,10 @@ router.put("/purchases/:id", purchaseController.updatePurchase);
 // Delete purchase by ID
 router.delete("/purchases/:id", purchaseController.deletePurchase);
 
+// Top-selling products
+router.get(
+	"/purchases/stats/top-selling-products",
+	purchaseController.getTopSellingProducts
+);
+
 export default router;

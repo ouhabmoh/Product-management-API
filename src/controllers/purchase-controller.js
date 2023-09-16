@@ -80,6 +80,19 @@ class PurchaseController {
 			res.status(500).json({ error: "Internal Server Error" });
 		}
 	}
+
+	async getTopSellingProducts(req, res) {
+		const limit = parseInt(req.query.limit) || 10; // Default limit to 10 if not specified
+
+		try {
+			const topSellingProducts =
+				await purchaseService.getTopSellingProducts(limit);
+			res.json(topSellingProducts);
+		} catch (error) {
+			console.error("Error fetching top-selling products:", error);
+			res.status(500).json({ error: "Internal Server Error" });
+		}
+	}
 }
 
 export default new PurchaseController();
