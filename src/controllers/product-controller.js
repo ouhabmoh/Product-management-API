@@ -17,7 +17,7 @@ class ProductController {
 		try {
 			const {
 				page = 1,
-				limit = 10,
+				limit = 5,
 				name,
 				category,
 				minPrice,

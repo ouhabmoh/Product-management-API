@@ -27,6 +27,8 @@ class ProductService {
 			return {
 				products,
 				totalCount,
+				currentPage: page,
+				totalPage: Math.ceil(totalCount / limit),
 			};
 		} catch (error) {
 			throw error;
