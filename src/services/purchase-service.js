@@ -76,7 +76,7 @@ class PurchaseService {
 				},
 				{
 					$lookup: {
-						from: "products", // Replace with your actual collection name
+						from: "products",
 						localField: "_id",
 						foreignField: "_id",
 						as: "productDetails",
