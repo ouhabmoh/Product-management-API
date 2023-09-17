@@ -47,6 +47,7 @@ class ProductService {
 
 	async updateProduct(productId, updates) {
 		try {
+			console.log(updates);
 			const updatedProduct = await Product.findByIdAndUpdate(
 				productId,
 				updates,
