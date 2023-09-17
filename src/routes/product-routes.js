@@ -5,6 +5,8 @@ import { validate } from "../middlewares/validation-middleware.js";
 import {
 	productCreationValidationRules,
 	productUpdateValidationRules,
+	validateProductId,
+	validateQueryParameters,
 } from "../validations/product-validations.js";
 const router = express.Router();
 
@@ -17,10 +19,20 @@ router.post(
 );
 
 // Get products with pagination and search
-router.get("/products", productController.getProducts);
+router.get(
+	"/products",
+	validateQueryParameters(),
+	validate,
+	productController.getProducts
+);
 
 // Get a product by ID
-router.get("/products/:id", productController.getProduct);
+router.get(
+	"/products/:id",
+	validateProductId(),
+	validate,
+	productController.getProduct
+);
 
 // Update a product by ID
 router.put(
@@ -31,6 +43,11 @@ router.put(
 );
 
 // Remove a product by ID
-router.delete("/products/:id", productController.removeProduct);
+router.delete(
+	"/products/:id",
+	validateProductId(),
+	validate,
+	productController.removeProduct
+);
 
 export default router;

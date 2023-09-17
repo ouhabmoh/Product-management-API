@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, param, query } from "express-validator";
 
 export const productCreationValidationRules = () => {
 	return [
@@ -65,5 +65,40 @@ export const productUpdateValidationRules = () => {
 			.optional() // Make the field optional for updates
 			.isInt({ min: 0 })
 			.withMessage("Quantity must be a positive integer"),
+	];
+};
+
+export const validateProductId = () => {
+	return param("id")
+		.isMongoId()
+		.withMessage("Product ID must be a valid ObjectId");
+};
+
+export const validateQueryParameters = () => {
+	return [
+		query("page")
+			.optional()
+			.isInt({ min: 1 })
+			.withMessage("Page must be a positive integer"),
+		query("limit")
+			.optional()
+			.isInt({ min: 1 })
+			.withMessage("Limit must be a positive integer"),
+		query("name")
+			.optional()
+			.isString()
+			.withMessage("Name must be a string"),
+		query("category")
+			.optional()
+			.isMongoId()
+			.withMessage("Category must be a valid ObjectId"),
+		query("minPrice")
+			.optional()
+			.isFloat({ min: 0 })
+			.withMessage("Min price must be a non-negative number"),
+		query("maxPrice")
+			.optional()
+			.isFloat({ min: 0 })
+			.withMessage("Max price must be a non-negative number"),
 	];
 };
