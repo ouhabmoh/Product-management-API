@@ -7,6 +7,7 @@ import { connectToDatabase } from "./src/configs/db.js"; // Import your database
 import productsRouter from "./src/routes/product-routes.js";
 import categoriesRouter from "./src/routes/category-routes.js";
 import purchasesRouter from "./src/routes/purchase-routes.js";
+import creditCardsRouter from "./src/routes/credit-card-routes.js";
 // Create an Express application
 const app = express();
 
@@ -30,6 +31,9 @@ app.use("/api", productsRouter);
 
 // Mount the purchases router
 app.use("/api", purchasesRouter);
+
+// Mount the credit cards router
+app.use("/api", creditCardsRouter);
 
 // Start the Express server
 const PORT = process.env.PORT || 3000; // Use the specified port or default to 3000
