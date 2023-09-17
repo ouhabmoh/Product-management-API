@@ -1,11 +1,17 @@
 // routes/product.routes.js
 import express from "express";
 import productController from "../controllers/product-controller.js";
-
+import { validate } from "../middlewares/validation-middleware.js";
+import { productCreationValidationRules } from "../validations/product-validations.js";
 const router = express.Router();
 
 // Add a new product
-router.post("/products", productController.addProduct);
+router.post(
+	"/products",
+	productCreationValidationRules(),
+	validate,
+	productController.addProduct
+);
 
 // Get products with pagination and search
 router.get("/products", productController.getProducts);
