@@ -1,5 +1,6 @@
-// controllers/purchase.controller.js
+import mongoose from "mongoose";
 import purchaseService from "../services/purchase-service.js";
+import productService from "../services/product-service.js";
 
 class PurchaseController {
 	async getAllPurchases(req, res) {
@@ -13,14 +14,52 @@ class PurchaseController {
 	}
 
 	async createPurchase(req, res) {
+		const session = await mongoose.startSession();
+		session.startTransaction();
+
 		try {
 			const purchaseData = req.body;
-			const newPurchase = await purchaseService.createPurchase(
-				purchaseData
+
+			// Verify if the product exists and has enough quantity available
+			const product = await productService.getProduct(
+				purchaseData.product
 			);
+			if (!product) {
+				return res.status(404).json({ error: "Product not found" });
+			}
+			if (product.qte < purchaseData.quantity) {
+				return res
+					.status(400)
+					.json({ error: "Insufficient quantity available" });
+			}
+
+			// // Verify if the user exists
+			// const user = await userService.getUserById(purchaseData.user);
+			// if (!user) {
+			// 	return res.status(404).json({ error: "User not found" });
+			// }
+
+			// Create the purchase
+			const newPurchase = await purchaseService.createPurchase(
+				purchaseData,
+				session
+			);
+
+			// Update the product quantity after the purchase
+			await productService.updateProduct(product._id, {
+				qte: product.qte - purchaseData.qte,
+			});
+
+			await session.commitTransaction();
+			session.endSession();
+
 			res.status(201).json(newPurchase);
 		} catch (error) {
 			console.error("Error creating purchase:", error);
+
+			await session.abortTransaction();
+			session.endSession();
+
 			res.status(500).json({ error: "Internal Server Error" });
 		}
 	}
