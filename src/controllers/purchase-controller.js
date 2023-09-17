@@ -19,7 +19,7 @@ class PurchaseController {
 
 		try {
 			const purchaseData = req.body;
-
+			console.log(purchaseData);
 			// Verify if the product exists and has enough quantity available
 			const product = await productService.getProduct(
 				purchaseData.product
@@ -46,8 +46,9 @@ class PurchaseController {
 			);
 
 			// Update the product quantity after the purchase
+			const newQuantity = product.qte - purchaseData.quantity;
 			await productService.updateProduct(product._id, {
-				qte: product.qte - purchaseData.qte,
+				qte: newQuantity,
 			});
 
 			await session.commitTransaction();
