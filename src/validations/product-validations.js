@@ -37,3 +37,33 @@ export const productCreationValidationRules = () => {
 			.withMessage("Quantity must be a positive integer"),
 	];
 };
+
+export const productUpdateValidationRules = () => {
+	return [
+		// name field validation
+		body("name")
+			.optional() // Make the field optional for updates
+			.isString()
+			.withMessage("Name must be a string")
+			.isLength({ min: 3, max: 100 })
+			.withMessage("Name must be between 3 and 100 characters"),
+
+		// category field validation (assuming it's a valid ObjectId)
+		body("category")
+			.optional() // Make the field optional for updates
+			.isMongoId()
+			.withMessage("Category must be a valid ObjectId"),
+
+		// price field validation
+		body("price")
+			.optional() // Make the field optional for updates
+			.isInt({ min: 0 })
+			.withMessage("Price must be a number"),
+
+		// qte field validation
+		body("qte")
+			.optional() // Make the field optional for updates
+			.isInt({ min: 0 })
+			.withMessage("Quantity must be a positive integer"),
+	];
+};

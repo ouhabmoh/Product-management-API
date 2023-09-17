@@ -2,7 +2,10 @@
 import express from "express";
 import productController from "../controllers/product-controller.js";
 import { validate } from "../middlewares/validation-middleware.js";
-import { productCreationValidationRules } from "../validations/product-validations.js";
+import {
+	productCreationValidationRules,
+	productUpdateValidationRules,
+} from "../validations/product-validations.js";
 const router = express.Router();
 
 // Add a new product
@@ -20,7 +23,12 @@ router.get("/products", productController.getProducts);
 router.get("/products/:id", productController.getProduct);
 
 // Update a product by ID
-router.put("/products/:id", productController.updateProduct);
+router.put(
+	"/products/:id",
+	productUpdateValidationRules(),
+	validate,
+	productController.updateProduct
+);
 
 // Remove a product by ID
 router.delete("/products/:id", productController.removeProduct);
