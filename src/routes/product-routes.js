@@ -1,6 +1,7 @@
 // routes/product.routes.js
 import express from "express";
 import productController from "../controllers/product-controller.js";
+import { isAdmin } from "../middlewares/authorization-middleware.js";
 import { validate } from "../middlewares/validation-middleware.js";
 import {
 	productCreationValidationRules,
@@ -13,6 +14,7 @@ const router = express.Router();
 // Add a new product
 router.post(
 	"/products",
+	isAdmin,
 	productCreationValidationRules(),
 	validate,
 	productController.addProduct
@@ -37,6 +39,7 @@ router.get(
 // Update a product by ID
 router.put(
 	"/products/:id",
+	isAdmin,
 	productUpdateValidationRules(),
 	validate,
 	productController.updateProduct
@@ -45,6 +48,7 @@ router.put(
 // Remove a product by ID
 router.delete(
 	"/products/:id",
+	isAdmin,
 	validateProductId(),
 	validate,
 	productController.removeProduct

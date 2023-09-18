@@ -3,6 +3,8 @@ import express from "express";
 import purchaseController from "../controllers/purchase-controller.js";
 import PurchaseValidationRules from "../validations/purchase-validation.js";
 import { validate } from "../middlewares/validation-middleware.js";
+import { isAdmin } from "../middlewares/authorization-middleware.js";
+import { isLoggedIn } from "../middlewares/authentication-middleware.js";
 const router = express.Router();
 
 // Purchase statistics
@@ -11,6 +13,7 @@ router.get("/purchases/stats", purchaseController.getPurchaseStats);
 // Create a new purchase
 router.post(
 	"/purchases",
+	isLoggedIn,
 	PurchaseValidationRules.createPurchaseValidationRules(),
 	validate,
 	purchaseController.createPurchase
@@ -19,6 +22,7 @@ router.post(
 // Get all purchases
 router.get(
 	"/purchases",
+	isAdmin,
 	PurchaseValidationRules.validateQueryParameters(),
 	validate,
 	purchaseController.getAllPurchases
@@ -27,6 +31,7 @@ router.get(
 // Get purchase by ID
 router.get(
 	"/purchases/:id",
+	isAdmin,
 	PurchaseValidationRules.validatePurchaseId(),
 	validate,
 	purchaseController.getPurchaseById
@@ -35,13 +40,20 @@ router.get(
 // Update purchase by ID
 router.put(
 	"/purchases/:id",
+	isAdmin,
 	PurchaseValidationRules.updatePurchaseValidationRules(),
 	validate,
 	purchaseController.updatePurchase
 );
 
 // Delete purchase by ID
-router.delete("/purchases/:id", purchaseController.deletePurchase);
+router.delete(
+	"/purchases/:id",
+	isAdmin,
+	PurchaseValidationRules.validatePurchaseId(),
+	validate,
+	purchaseController.deletePurchase
+);
 
 // Top-selling products
 router.get(
