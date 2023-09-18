@@ -8,6 +8,7 @@ import productsRouter from "./src/routes/product-routes.js";
 import categoriesRouter from "./src/routes/category-routes.js";
 import purchasesRouter from "./src/routes/purchase-routes.js";
 import creditCardsRouter from "./src/routes/credit-card-routes.js";
+import authRouter from "./src/routes/auth-routes.js";
 // Create an Express application
 const app = express();
 
@@ -34,6 +35,9 @@ app.use("/api", purchasesRouter);
 
 // Mount the credit cards router
 app.use("/api", creditCardsRouter);
+
+// Mount the authentification router
+app.use("/api", authRouter);
 
 // Start the Express server
 const PORT = process.env.PORT || 3000; // Use the specified port or default to 3000
