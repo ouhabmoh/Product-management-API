@@ -8,11 +8,11 @@ import { isLoggedIn } from "../middlewares/authentication-middleware.js";
 const router = express.Router();
 
 // Purchase statistics
-router.get("/purchases/stats", purchaseController.getPurchaseStats);
+router.get("/stats", purchaseController.getPurchaseStats);
 
 // Create a new purchase
 router.post(
-	"/purchases",
+	"/",
 	isLoggedIn,
 	PurchaseValidationRules.createPurchaseValidationRules(),
 	validate,
@@ -21,7 +21,7 @@ router.post(
 
 // Get all purchases
 router.get(
-	"/purchases",
+	"/",
 	isAdmin,
 	PurchaseValidationRules.validateQueryParameters(),
 	validate,
@@ -30,7 +30,7 @@ router.get(
 
 // Get purchase by ID
 router.get(
-	"/purchases/:id",
+	"/:id",
 	isAdmin,
 	PurchaseValidationRules.validatePurchaseId(),
 	validate,
@@ -39,7 +39,7 @@ router.get(
 
 // Update purchase by ID
 router.put(
-	"/purchases/:id",
+	"/:id",
 	isAdmin,
 	PurchaseValidationRules.updatePurchaseValidationRules(),
 	validate,
@@ -48,7 +48,7 @@ router.put(
 
 // Delete purchase by ID
 router.delete(
-	"/purchases/:id",
+	"/:id",
 	isAdmin,
 	PurchaseValidationRules.validatePurchaseId(),
 	validate,
@@ -57,14 +57,11 @@ router.delete(
 
 // Top-selling products
 router.get(
-	"/purchases/stats/top-selling-products",
+	"/stats/top-selling-products",
 	purchaseController.getTopSellingProducts
 );
 
 // Purchase trends
-router.get(
-	"/purchases/stats/purchase-trends",
-	purchaseController.getPurchaseTrends
-);
+router.get("/stats/purchase-trends", purchaseController.getPurchaseTrends);
 
 export default router;

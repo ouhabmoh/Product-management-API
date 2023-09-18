@@ -8,7 +8,7 @@ const router = express.Router();
 
 // Create a new category
 router.post(
-	"/categories",
+	"/",
 	isAdmin,
 	CategoryValidationRules.createCategoryValidationRules(),
 	validate,
@@ -16,11 +16,11 @@ router.post(
 );
 
 // Get all categories
-router.get("/categories", categoryController.getCategories);
+router.get("/", categoryController.getCategories);
 
 // Get a category by ID
 router.get(
-	"/categories/:id",
+	"/:id",
 	CategoryValidationRules.validateCategoryId(),
 	validate,
 	categoryController.getCategoryById
@@ -28,7 +28,7 @@ router.get(
 
 // Update a category by ID
 router.put(
-	"/categories/:id",
+	"/:id",
 	isAdmin,
 	CategoryValidationRules.updateCategoryValidationRules(),
 	validate,
@@ -37,7 +37,7 @@ router.put(
 
 // Delete a category by ID
 router.delete(
-	"/categories/:id",
+	"/:id",
 	isAdmin,
 	CategoryValidationRules.validateCategoryId(),
 	validate,

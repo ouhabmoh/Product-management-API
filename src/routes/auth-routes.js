@@ -5,16 +5,19 @@ import {
 	registerValidationRules,
 } from "../validations/auth-validation.js";
 import { validate } from "../middlewares/validation-middleware.js";
+import { isNotLoggedIn } from "../middlewares/authentication-middleware.js";
 const router = express.Router();
 
 router.post(
-	"/auth/login",
+	"/login",
+	isNotLoggedIn,
 	loginValidationRules(),
 	validate,
 	AuthController.login
 );
 router.post(
-	"/auth/register",
+	"/register",
+	isNotLoggedIn,
 	registerValidationRules(),
 	validate,
 	AuthController.register

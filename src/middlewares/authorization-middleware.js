@@ -18,7 +18,6 @@ export const isAdmin = (req, res, next) => {
 		}
 
 		req.user = user;
-		//   next();
-	});
-	req, res, next;
+		next();
+	})(req, res, next);
 };

@@ -13,7 +13,7 @@ const router = express.Router();
 
 // Add a new product
 router.post(
-	"/products",
+	"/",
 	isAdmin,
 	productCreationValidationRules(),
 	validate,
@@ -22,23 +22,18 @@ router.post(
 
 // Get products with pagination and search
 router.get(
-	"/products",
+	"/",
 	validateQueryParameters(),
 	validate,
 	productController.getProducts
 );
 
 // Get a product by ID
-router.get(
-	"/products/:id",
-	validateProductId(),
-	validate,
-	productController.getProduct
-);
+router.get("/:id", validateProductId(), validate, productController.getProduct);
 
 // Update a product by ID
 router.put(
-	"/products/:id",
+	"/:id",
 	isAdmin,
 	productUpdateValidationRules(),
 	validate,
@@ -47,7 +42,7 @@ router.put(
 
 // Remove a product by ID
 router.delete(
-	"/products/:id",
+	"/:id",
 	isAdmin,
 	validateProductId(),
 	validate,

@@ -1,14 +1,9 @@
-// app.js
-
 import express from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
-import { connectToDatabase } from "./src/configs/db.js"; // Import your database connection function
-import productsRouter from "./src/routes/product-routes.js";
-import categoriesRouter from "./src/routes/category-routes.js";
-import purchasesRouter from "./src/routes/purchase-routes.js";
-import creditCardsRouter from "./src/routes/credit-card-routes.js";
-import authRouter from "./src/routes/auth-routes.js";
+import { connectToDatabase } from "./src/configs/db.js"; // Import database connection function
+import router from "./src/routes/routes.js";
+
 // Create an Express application
 const app = express();
 
@@ -19,25 +14,8 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Define a simple route
-app.get("/", (req, res) => {
-	res.json({ message: "Hello, world!" });
-});
-
-// Mount the categories router
-app.use("/api", categoriesRouter);
-
-// Mount the products router
-app.use("/api", productsRouter);
-
-// Mount the purchases router
-app.use("/api", purchasesRouter);
-
-// Mount the credit cards router
-app.use("/api", creditCardsRouter);
-
-// Mount the authentification router
-app.use("/api", authRouter);
+// Use the router defined in router.js
+app.use("/api", router);
 
 // Start the Express server
 const PORT = process.env.PORT || 3000; // Use the specified port or default to 3000
