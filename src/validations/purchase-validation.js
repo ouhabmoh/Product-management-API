@@ -11,13 +11,6 @@ class PurchaseValidationRules {
 				.isMongoId()
 				.withMessage("Product ID must be a valid ObjectId"),
 
-			// Validate the user ID
-			body("user")
-				.notEmpty()
-				.withMessage("User ID is required")
-				.isMongoId()
-				.withMessage("User ID must be a valid ObjectId"),
-
 			// Validate the quantity
 			body("quantity")
 				.notEmpty()

@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 const signToken = (user) => {
 	return new Promise((resolve, reject) => {
 		const tokenPayload = {
+			_id: user._id,
 			email: user.email,
 			username: user.username,
 			role: user.role,

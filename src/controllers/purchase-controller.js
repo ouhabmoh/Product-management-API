@@ -19,7 +19,8 @@ class PurchaseController {
 
 		try {
 			const purchaseData = req.body;
-			console.log(purchaseData);
+			const userId = req.user._id; // Get the user ID from the token
+
 			// Verify if the product exists and has enough quantity available
 			const product = await productService.getProduct(
 				purchaseData.product
@@ -33,17 +34,11 @@ class PurchaseController {
 					.json({ error: "Insufficient quantity available" });
 			}
 
-			// // Verify if the user exists
-			// const user = await userService.getUserById(purchaseData.user);
-			// if (!user) {
-			// 	return res.status(404).json({ error: "User not found" });
-			// }
-
 			// Create the purchase
-			const newPurchase = await purchaseService.createPurchase(
-				purchaseData,
-				session
-			);
+			const newPurchase = await purchaseService.createPurchase({
+				...purchaseData,
+				user: userId, // Set the user ID in the purchase data
+			});
 
 			// Update the product quantity after the purchase
 			const newQuantity = product.qte - purchaseData.quantity;
