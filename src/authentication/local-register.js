@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import User from "../models/User.js";
+
+import userService from "../services/user-service.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -17,27 +18,18 @@ passport.use(
 			try {
 				const email = req.body.email;
 
-				// Check if a user with the given email or username already exists
-				const existingUser = await User.findOne({
-					$or: [{ email }, { username }],
+				const newUser = await userService.createUser({
+					email,
+					username,
+					password,
 				});
-
-				if (existingUser) {
-					return done(null, false, {
-						message: "Email/username is already taken.",
-					});
+				if (newUser) {
+					return done(null, newUser);
 				}
 
-				// Create a new user
-				const newUser = await User.register(
-					new User({
-						email,
-						username,
-					}),
-					password
-				);
-
-				return done(null, newUser);
+				return done(null, false, {
+					message: "Email/username is already taken.",
+				});
 			} catch (error) {
 				return done(error);
 			}
