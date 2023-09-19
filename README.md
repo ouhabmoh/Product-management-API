@@ -11,19 +11,7 @@ Welcome to the Product Management API, a powerful tool for managing products and
 -    [Configuration](#configuration)
 -    [Usage](#usage)
 -    [Authentication](#authentication)
--    [Testing](#testing)
--    [Contributing](#contributing)
--    [License](#license)
--    [Authors](#authors)
--    [Acknowledgments](#acknowledgments)
 -    [API Documentation](#api-documentation)
--    [Docker](#docker)
--    [Deployment](#deployment)
--    [Troubleshooting](#troubleshooting)
--    [Changelog](#changelog)
--    [Roadmap](#roadmap)
--    [Support](#support)
--    [GitHub Repository](#github-repository)
 
 ## Introduction
 
@@ -43,8 +31,7 @@ The Product Management API simplifies the task of managing products and categori
 -    MongoDB: A NoSQL database for storing product and category data.
 -    Mongoose: An Object Data Modeling (ODM) library for MongoDB and Node.js.
 -    Passport.js: Authentication middleware for Node.js.
--    Docker: Containerization for easy deployment.
--    Jest: A JavaScript testing framework.
+-
 
 ## Installation
 
@@ -92,22 +79,26 @@ JWT_SECRET_KEY
 TOKEN_EXPIRATION_TIME
 ```
 
+## Run the Project:
+
+Start the API server by running the following command:
+
+```bash
+
+npm start
+```
+
+The API server will start, and you'll see log messages indicating that the server is running. By default, it will run on http://localhost:PORT, but you can adjust the port and other settings in your .env file.
+
+**Access the API:** You can now access the API by opening a web browser or using a tool like Postman to send HTTP requests to the endpoints. Refer to the API Documentation section for detailed instructions on how to use the API.
+
 ## Usage
 
 The API offers a variety of endpoints for managing products and categories. Refer to the API Documentation section for detailed usage instructions, including example requests and responses.
 
-Authentication
+## Authentication
 
 To access certain endpoints, authentication is required. Follow the API Documentation to learn how to authenticate with the API.
-
-Testing
-
-You can run tests for the API using Jest. Execute the following command:
-
-```bash
-
-npm test
-```
 
 ## API Documentation
 
