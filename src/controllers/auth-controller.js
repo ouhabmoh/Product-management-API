@@ -11,7 +11,7 @@ export const login = (req, res, next) => {
 				return res.status(400).json({ message: info.message });
 			}
 			const token = await signToken(user);
-			sendResponse(res, user, token);
+			sendResponse(res, 200, token);
 		} catch (error) {
 			next(error);
 		}
@@ -28,15 +28,15 @@ export const register = (req, res, next) => {
 				return res.status(400).json({ message: info.message });
 			}
 			const token = await signToken(user);
-			sendResponse(res, user, token);
+			sendResponse(res, 201, token);
 		} catch (error) {
 			next(error);
 		}
 	})(req, res, next);
 };
 
-const sendResponse = (res, user, token) => {
-	res.status(200).json({
+const sendResponse = (res, status, token) => {
+	res.status(status).json({
 		token,
 	});
 };
