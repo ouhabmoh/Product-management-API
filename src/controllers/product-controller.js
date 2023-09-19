@@ -43,9 +43,6 @@ class ProductController {
 				}
 			}
 
-			console.log(filters);
-			console.log(page);
-			console.log(limit);
 			const products = await productService.getProducts({
 				page: parseInt(page),
 				limit: parseInt(limit),
