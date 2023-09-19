@@ -1,22 +1,26 @@
-import User from '../models/User.js';
+import User from "../models/User.js";
 
-export const getUsers = async () => {
-  return await User.find();
-};
+class UserService {
+	async getUsers() {
+		return await User.find().select("_id email username role");
+	}
 
-export const getUser = async (id) => {
-  return await User.findById(id);
-};
+	async getUser(id) {
+		return await User.findById(id).select(" _id email username role");
+	}
 
-export const createUser = async (user) => {
-  const newUser = new User(user);
-  return await newUser.save();
-};
+	async createUser(user) {
+		const newUser = new User(user);
+		return await newUser.save();
+	}
 
-export const updateUser = async (id, user) => {
-  return await User.findByIdAndUpdate(id, user);
-};
+	async updateUser(id, user) {
+		return await User.findByIdAndUpdate(id, user);
+	}
 
-export const deleteUser = async (id) => {
-  return await User.findByIdAndDelete(id);
-};
+	async deleteUser(id) {
+		return await User.findByIdAndDelete(id);
+	}
+}
+
+export default new UserService();

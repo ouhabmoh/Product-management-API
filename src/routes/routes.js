@@ -4,7 +4,7 @@ import categoriesRouter from "./category-routes.js";
 import purchasesRouter from "./purchase-routes.js";
 import creditCardsRouter from "./credit-card-routes.js";
 import authRouter from "./auth-routes.js";
-
+import usersRouter from "./user-routes.js";
 const router = express.Router();
 
 // Mount the categories router
@@ -21,6 +21,9 @@ router.use("/credit-card", creditCardsRouter);
 
 // Mount the authentication router
 router.use("/auth", authRouter);
+
+// Mount the users router
+router.use("/users", usersRouter);
 
 // Define a default route (catch-all route)
 router.use((req, res) => {
