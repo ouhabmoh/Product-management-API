@@ -72,7 +72,7 @@ class PurchaseService {
 					},
 				},
 				{
-					$limit: 10, // Limit the results to the top 10 selling products
+					$limit: limit, // Limit the results to the top 10 selling products
 				},
 				{
 					$lookup: {
