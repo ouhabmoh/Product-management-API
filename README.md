@@ -50,7 +50,7 @@ The Product Management API simplifies the task of managing products and categori
 
 To set up the Product Management API locally, follow these steps:
 
-1. Clone the GitHub repository:
+1. **Clone the GitHub repository:**
 
      ```bash
      git clone https://github.com/yourusername/product-management-api.git
@@ -62,7 +62,7 @@ To set up the Product Management API locally, follow these steps:
      cd product-management-api
      ```
 
-## Install dependencies:
+3. **Install dependencies:**
 
 ```bash
 npm install
