@@ -9,9 +9,42 @@ class UserService {
 		return await User.findById(id).select(" _id email username role");
 	}
 
+	async checkEmailOrUsernameExists(email, username) {
+		return await User.findOne({
+			$or: [{ email }, { username }],
+		});
+	}
+
 	async createUser(user) {
-		const newUser = new User(user);
-		return await newUser.save();
+		try {
+			const { email, username, password } = user;
+
+			// Check if email or username already exists
+			const existingUser = await this.checkEmailOrUsernameExists(
+				email,
+				username
+			);
+
+			if (existingUser) return false;
+
+			// Create a new user
+			const newUser = await User.register(
+				new User({
+					email,
+					username,
+				}),
+				password
+			);
+			// Return only the desired fields
+			const {
+				_id,
+				email: userEmail,
+				username: userUsername,
+			} = newUser;
+			return { _id, email: userEmail, username: userUsername };
+		} catch (error) {
+			throw new Error("Failed to create user: " + error.message);
+		}
 	}
 
 	async updateUser(id, user) {

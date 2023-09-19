@@ -25,8 +25,15 @@ export const getUser = async (req, res) => {
 export const createUser = async (req, res) => {
 	try {
 		const newUser = await userService.createUser(req.body);
-		res.status(201).json({ message: "User created", newUser });
+		if (newUser) {
+			res.status(201).json({ message: "User created", newUser });
+		} else {
+			res.status(400).json({
+				message: "Email/username is already taken.",
+			});
+		}
 	} catch (error) {
+		console.error(error);
 		res.status(500).json({ error: "Internal server error" });
 	}
 };
