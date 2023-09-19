@@ -37,7 +37,9 @@ class ProductService {
 
 	async getProduct(productId) {
 		try {
-			const product = await Product.findById(productId);
+			const product = await Product.findById(productId).populate(
+				"category"
+			); // Populate the category field;
 
 			return product;
 		} catch (error) {
