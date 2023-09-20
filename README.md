@@ -12,6 +12,7 @@ Welcome to the Product Management API, a powerful tool for managing products and
 -    [Usage](#usage)
 -    [Authentication](#authentication)
 -    [API Documentation](#api-documentation)
+-    [Database Schema](#database-schema-and-model-design-choices)
 
 ## Introduction
 
@@ -103,3 +104,7 @@ To access certain endpoints, authentication is required. Follow the API Document
 ## API Documentation
 
 For detailed API documentation, please refer to the [API Documentation](https://brindle-armadillo-af0.notion.site/Product-Management-API-Docs-a45e490414c74d6e886272430b37e348?pvs=4).
+
+## Database Schema and Model Design Choices
+
+For detailed Explanations, please refer to the [Model](https://brindle-armadillo-af0.notion.site/Database-schema-and-model-design-choices-0a80423f10104804a60b310743d54886?pvs=4).
