@@ -38,6 +38,8 @@ export const createUser = async (req, res) => {
 	}
 };
 
+// the updateUser is still quite simple and not complete ,there is still a lot to add, verification, password update.
+
 export const updateUser = async (req, res) => {
 	try {
 		const updatedUser = await userService.updateUser(

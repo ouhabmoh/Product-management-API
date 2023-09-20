@@ -30,4 +30,10 @@ router.use((req, res) => {
 	res.status(404).json({ message: "Page not found" });
 });
 
+// Error handling middleware
+router.use((error, req, res, next) => {
+	console.error("Error:", error);
+	res.status(500).json({ error: "Internal server error" });
+});
+
 export default router;

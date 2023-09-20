@@ -1,6 +1,9 @@
 import passport from "../authentication/passport.js";
 import signToken from "../authentication/sign-token.js";
 
+//This is a simple authentification system with only register and login,
+// there is a lot of improvements needed ( email confirmation, password reset, refresh token….)
+
 export const login = (req, res, next) => {
 	passport.authenticate("local-login", async (err, user, info) => {
 		try {
