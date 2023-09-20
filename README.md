@@ -13,7 +13,6 @@ Welcome to the Product Management API for managing products and categories. This
 -    [Authentication](#authentication)
 -    [API Documentation](#api-documentation)
 -    [Database Schema](#database-schema-and-model-design-choices)
-
 ## Introduction
 
 The Product Management API simplifies the task of managing products, purchases, users and category and categories for your business.
